@@ -1,0 +1,27 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes" access="global"
+    controller="BoatSearchForm_Ctrl">
+    <aura:attribute name="boatTypes" type="List" default="[]"/>
+    <aura:attribute name="canCreateRecord" type="Boolean" default="false"/>
+
+    <aura:handler name="init" value="{!this}" action="{!c.init}" />
+	<lightning:layout horizontalAlign="center">
+        <lightning:layoutItem padding="around-small">
+            <lightning:select aura:Id="selectBoatType" label="Select Boat Type"
+                variant="label-hidden">
+                <option text="All Types" value=""/>
+                <aura:iteration items="{!v.boatTypes}" var="boatType">
+                    <option text="{!boatType.Name}" value="{!boatType.Id}"/>
+                 </aura:iteration>
+            </lightning:select>
+        </lightning:layoutItem>
+		<lightning:layoutItem padding="around-small">
+        	<lightning:button variant="brand" label="Search"/>
+        </lightning:layoutItem>
+		<lightning:layoutItem padding="around-small">
+            <aura:if isTrue="{!v.canCreateRecord}">
+                <lightning:button variant="neutral" label="New" onclick="{!c.createNewBoatRecord}" />
+            </aura:if>
+        </lightning:layoutItem>
+    </lightning:layout>
+
+</aura:component>
