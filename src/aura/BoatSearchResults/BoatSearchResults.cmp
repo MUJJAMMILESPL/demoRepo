@@ -1,0 +1,23 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes" access="global"
+    controller="BoatSearchResults">
+	<aura:attribute name="boats" type="Boat__c[]"/>
+
+    <aura:handler name="init" value="{!this}" action="{!c.init}" />
+
+    <div style="padding:2%;">
+        <aura:if isTrue="{!v.boats.length > 0}">
+            <lightning:layout pullToBoundary="medium" multipleRows="true" >
+                <aura:iteration items="{!v.boats}" var="boat">
+                    <lightning:layoutItem flexibility="grow" size="3" padding="around-small">
+                        <c:BoatTile boat="{!boat}" />
+                    </lightning:layoutItem>
+                </aura:iteration>        
+            </lightning:layout>
+            <aura:set attribute="else">
+                <span class="slds-align_absolute-center">                	
+                    <lightning:formattedText value="No boats found" class="slds-text-align_center"/>
+                </span>
+            </aura:set>
+        </aura:if>
+    </div>
+</aura:component>
